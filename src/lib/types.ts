@@ -1,0 +1,146 @@
+// Mock types for the blog
+export interface FlatPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  image: {
+    url: string | null;
+    alt: string | null;
+  };
+  author: {
+    name: string;
+    pictureUrl: string | null;
+  }
+}
+
+// 👇👇 ده الـ Interface الجديد اللي كان ناقص
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  avatar?: string; // 👈 ده اللي هيحل الإيرور
+}
+
+// Blog Post Types
+export interface Author {
+  id: number;
+  name: string;
+  picture: string | null;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  publish_date: string;
+  author: Author | null; // Full Author object
+  image: string;
+  status: 'Published' | 'Draft';
+  cover_image?: string;
+}
+
+// Property Types
+export interface Amenity {
+  id: number;
+  name: string;
+}
+
+export interface Location {
+  id: number;
+  name: string;
+  slug: string;
+  map_url: string | null;
+}
+
+export interface Developer {
+  id: number;
+  name: string;
+  slug: string;
+  logo: string | null;
+  description: string;
+  projects_count: number;
+  image?: string;
+}
+
+export interface Compound {
+  id: number;
+  name: string;
+  slug: string;
+  developer: Developer; // Full Developer object
+  location: Location; // Full Location object
+  main_image: string;
+  description: string;
+  status: string;
+  delivery_date: string;
+  amenities: Amenity[]; // Array of Amenity objects
+  min_price?: number | string;
+  max_installment_years?: number;
+  // delivery_date?: number; // ⚠️ كان متكرر مرتين، سيبتلك الـ string فوق وشيلت ده عشان التعارض
+  images?: string[];
+  video_url?: string;
+  min_area?: number;
+}
+
+export interface Property {
+  id: number;
+  title: string;
+  slug: string;
+  compound: Compound | null; // Full Compound object or null
+  developer: Developer | null; // Full Developer object or null
+  location: Location | null; // Full Location object or null
+  property_type: string;
+  price: string;
+  area: number;
+  bedrooms: number;
+  bathrooms: number;
+  description: string;
+  main_image: string;
+  floor_plan_image: string | null;
+  map_image: string | null;
+  is_new_launch: boolean;
+  is_featured: boolean;
+  amenities: Amenity[]; // Array of Amenity objects
+  gallery_images: PropertyImage[]; // Array of PropertyImage objects
+}
+
+export interface PropertyImage {
+  id: number;
+  property: number; // Property ID
+  image: string;
+  alt_text: string;
+}
+
+// Partner Type
+export interface Partner {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+// Testimonial Type
+export interface Testimonial {
+  id: number;
+  client_name: string;
+  client_photo?: string; // For backward compatibility
+  client_avatar?: string; // Alias for client_photo
+  testimonial_text: string; // The main testimonial content
+  quote?: string; // Alias for testimonial_text
+  rating: number;
+  image?: string; // For fallback in the UI
+}
+
+// Contact Form Submission Type
+export interface ContactFormSubmission {
+  id: number;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string;
+  submitted_at: string;
+}
